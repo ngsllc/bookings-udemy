@@ -116,6 +116,26 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js" 
     integrity="sha384-Piv4xVNRyMGpqkS2by6br4gNJ7DXjqk09RmUpJ8jgGtD7zP9yug3goQfGII0yAns" 
     crossorigin="anonymous"></script>
+<script>
+      (function() {
+        'use strict';
+
+        window.addEventListener('load', function() {
+          // fetch all the forms we want to apply custom bootstrap validation styles to
+          let forms = document.getElementsByClassName('needs-validation');
+          // loop over them and prevent submission
+          Array.prototype.filter.call(forms, function(form) {
+            form.addEventListener("submit", function(event) {
+              if (form.checkValidity() === false) {
+                event.preventDefault();
+                event.stopPropagation();
+              }
+              form.classList.add('was-validated');
+            }, false);
+          });
+        }, false);
+      })();
+</script>
 
 
 </body>
