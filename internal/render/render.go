@@ -1,8 +1,8 @@
 package render
 
 import (
-	"bookings-udemy/pkg/config"
-	"bookings-udemy/pkg/models"
+	"bookings-udemy/internal/config"
+	"bookings-udemy/internal/models"
 	"bytes"
 	"fmt"
 	"html/template"
