@@ -15,6 +15,8 @@ require (
 	github.com/gobuffalo/soda v0.0.0-20200220193241-41b735b1ecd3 // indirect
 	github.com/gobuffalo/validate v2.0.4+incompatible // indirect
 	github.com/gofrs/uuid v4.2.0+incompatible // indirect
+	github.com/jackc/pgconn v1.11.0 // indirect
+	github.com/jackc/pgx/v4 v4.15.0 // indirect
 	github.com/justinas/nosurf v1.1.1
 	github.com/spf13/cobra v1.4.0 // indirect
 )
