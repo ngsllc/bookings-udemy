@@ -71,7 +71,7 @@ func (m *postgresDBRepo) SearchAvailabilityByDates(start, end time.Time, roomID 
 
 	query := `select count(id)
 						from room_restrictions
-						where roomID = $1 and $2 < end_date and $3 > start_date`
+						where room_id = $1 and ($2 < end_date and $3 > start_date)`
 
 	var numRows int
 	row := m.DB.QueryRowContext(ctx, query, roomID, start, end)
