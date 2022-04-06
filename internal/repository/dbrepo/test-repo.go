@@ -39,3 +39,13 @@ func (m *testDBRepo) GetRoomByID(id int) (models.Room, error) {
 	}
 	return room, nil
 }
+
+// updates a given user
+func (m *testDBRepo) UpdateUser(u models.User) error {
+	return nil
+}
+
+// compares user entered email and password with hashed password from the database
+func (m *testDBRepo) Authenticate(email, testPassword string) (int, string, error) {
+	return 1, "", nil
+}
