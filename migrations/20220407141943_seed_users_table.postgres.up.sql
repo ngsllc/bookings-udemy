@@ -1,0 +1,2 @@
+INSERT INTO public.users (first_name,last_name,email,"password",access_level,created_at,updated_at) VALUES
+	 ('cole','stevenson','cole@cole.com','$2a$12$iMOpnO6SHauswL8iKWWl1O04GjKYhd2Ch8Mgp2BTcvxc6k3hrOc06',3,'2022-04-06 10:58:48.718','2022-04-06 10:58:48.718');
