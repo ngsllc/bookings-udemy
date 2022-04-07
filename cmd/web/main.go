@@ -8,6 +8,7 @@ import (
 	"bookings-udemy/internal/models"
 	"bookings-udemy/internal/render"
 	"encoding/gob"
+	"flag"
 	"fmt"
 	"log"
 	"net/http"
@@ -52,8 +53,26 @@ func run() (*driver.DB, error) {
 	gob.Register(models.Room{})
 	gob.Register(models.Restriction{})
 
+	// read flags
+	inProduction := flag.Bool("production", true, "application is in production")
+	useCache := flag.Bool("cache", true, "use template cache")
+	dbName := flag.String("dbname", "", "database name")
+	dbUser := flag.String("dbuser", "", "database user")
+	dbPass := flag.String("dbpass", "", "database password")
+	dbPort := flag.String("dbport", "", "database port")
+	dbSSL := flag.String("dbssl", "disable", "database ssl settings (disable, prefer, require)")
+	dbHost := flag.String("dbhost", "localhost", "database host")
+
+	flag.Parse()
+
+	if *dbName == "" || *dbUser == "" {
+		fmt.Println("Missing required flags")
+		os.Exit(1)
+	}
+
 	// change this to true when in production
-	app.InProduction = false
+	app.InProduction = *inProduction
+	app.UseCache = *useCache
 
 	// centralize our error handling
 	infoLog = log.New(os.Stdout, "INFO\t", log.Ldate|log.Ltime)
@@ -73,7 +92,8 @@ func run() (*driver.DB, error) {
 
 	// connect to database
 	log.Println("Connecting to database...")
-	db, err := driver.ConnectSQL("host=localhost port=5432 dbname=bookings user=postgres password=0penSourceKing")
+	connectionString := fmt.Sprintf("host=%s port=%s dbname=%s user=%s password=%s sslmode=%s", *dbHost, *dbPort, *dbName, *dbUser, *dbPass, *dbSSL)
+	db, err := driver.ConnectSQL(connectionString)
 	if err != nil {
 		log.Fatal("Cannot connect to database, dying")
 	}
